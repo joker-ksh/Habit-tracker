@@ -1,5 +1,7 @@
 # Habit Tracker API
 
+> 🚀 **Live API:** [https://habit-tracker-6hob.onrender.com](https://habit-tracker-6hob.onrender.com)
+
 A production-ready RESTful API for tracking daily and weekly habits, built with **Node.js**, **Express**, **TypeScript**, and **MongoDB Atlas**.
 
 ---

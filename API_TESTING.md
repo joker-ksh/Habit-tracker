@@ -1,7 +1,7 @@
 # API Testing — Habit Tracker
 
-Base URL: `http://localhost:5000`
-
+Base URL local: `https://habit-tracker-6hob.onrender.com`
+Base URL: `https://habit-tracker-6hob.onrender.com`
 > Run these curls in order. After login, replace `TOKEN` with the token from the response.
 > After creating a habit, replace `HABIT_ID` with the `_id` from the response.
 
@@ -10,7 +10,7 @@ Base URL: `http://localhost:5000`
 ## 1. Health Check
 
 ```bash
-curl http://localhost:5000/health
+curl https://habit-tracker-6hob.onrender.com/health
 ```
 
 ---
@@ -18,21 +18,21 @@ curl http://localhost:5000/health
 ## 2. Register
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/auth/register \
   -H "Content-Type: application/json" \
   -d "{\"name\": \"Alice Johnson\", \"email\": \"alice@example.com\", \"password\": \"secret123\"}"
 ```
 
 **Duplicate email (expect 409):**
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/auth/register \
   -H "Content-Type: application/json" \
   -d "{\"name\": \"Alice Again\", \"email\": \"alice@example.com\", \"password\": \"secret123\"}"
 ```
 
 **Validation error (expect 400):**
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/auth/register \
   -H "Content-Type: application/json" \
   -d "{\"name\": \"\", \"email\": \"not-an-email\", \"password\": \"123\"}"
 ```
@@ -42,14 +42,14 @@ curl -X POST http://localhost:5000/api/auth/register \
 ## 3. Login
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/auth/login \
   -H "Content-Type: application/json" \
   -d "{\"email\": \"alice@example.com\", \"password\": \"secret123\"}"
 ```
 
 **Wrong password (expect 401):**
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/auth/login \
   -H "Content-Type: application/json" \
   -d "{\"email\": \"alice@example.com\", \"password\": \"wrongpass\"}"
 ```
@@ -62,7 +62,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 
 **Full payload:**
 ```bash
-curl -X POST http://localhost:5000/api/habits \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/habits \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d "{\"title\": \"Morning Run\", \"description\": \"Run 5km every morning\", \"frequency\": \"daily\", \"tags\": [\"fitness\", \"health\"], \"reminderTime\": \"06:30\"}"
@@ -70,7 +70,7 @@ curl -X POST http://localhost:5000/api/habits \
 
 **Minimal payload:**
 ```bash
-curl -X POST http://localhost:5000/api/habits \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/habits \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d "{\"title\": \"Read 20 Pages\", \"frequency\": \"daily\"}"
@@ -78,7 +78,7 @@ curl -X POST http://localhost:5000/api/habits \
 
 **Weekly habit:**
 ```bash
-curl -X POST http://localhost:5000/api/habits \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/habits \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d "{\"title\": \"Deep Clean\", \"frequency\": \"weekly\", \"tags\": [\"chores\"]}"
@@ -86,7 +86,7 @@ curl -X POST http://localhost:5000/api/habits \
 
 **Missing fields (expect 400):**
 ```bash
-curl -X POST http://localhost:5000/api/habits \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/habits \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d "{\"description\": \"no title or frequency\"}"
@@ -94,7 +94,7 @@ curl -X POST http://localhost:5000/api/habits \
 
 **Invalid frequency (expect 400):**
 ```bash
-curl -X POST http://localhost:5000/api/habits \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/habits \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d "{\"title\": \"Yoga\", \"frequency\": \"monthly\"}"
@@ -102,7 +102,7 @@ curl -X POST http://localhost:5000/api/habits \
 
 **Duplicate title (expect 409):**
 ```bash
-curl -X POST http://localhost:5000/api/habits \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/habits \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d "{\"title\": \"Morning Run\", \"frequency\": \"daily\"}"
@@ -110,7 +110,7 @@ curl -X POST http://localhost:5000/api/habits \
 
 **No token (expect 401):**
 ```bash
-curl -X POST http://localhost:5000/api/habits \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/habits \
   -H "Content-Type: application/json" \
   -d "{\"title\": \"Yoga\", \"frequency\": \"daily\"}"
 ```
@@ -120,25 +120,25 @@ curl -X POST http://localhost:5000/api/habits \
 ## 5. Get All Habits
 
 ```bash
-curl http://localhost:5000/api/habits \
+curl https://habit-tracker-6hob.onrender.com/api/habits \
   -H "Authorization: Bearer TOKEN"
 ```
 
 **With pagination:**
 ```bash
-curl "http://localhost:5000/api/habits?page=1&limit=2" \
+curl "https://habit-tracker-6hob.onrender.com/api/habits?page=1&limit=2" \
   -H "Authorization: Bearer TOKEN"
 ```
 
 **Filter by tag:**
 ```bash
-curl "http://localhost:5000/api/habits?tag=fitness" \
+curl "https://habit-tracker-6hob.onrender.com/api/habits?tag=fitness" \
   -H "Authorization: Bearer TOKEN"
 ```
 
 **Pagination + tag filter:**
 ```bash
-curl "http://localhost:5000/api/habits?tag=health&page=1&limit=5" \
+curl "https://habit-tracker-6hob.onrender.com/api/habits?tag=health&page=1&limit=5" \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -149,19 +149,19 @@ curl "http://localhost:5000/api/habits?tag=health&page=1&limit=5" \
 > Replace `HABIT_ID` with the `_id` from the create response.
 
 ```bash
-curl http://localhost:5000/api/habits/HABIT_ID \
+curl https://habit-tracker-6hob.onrender.com/api/habits/HABIT_ID \
   -H "Authorization: Bearer TOKEN"
 ```
 
 **Wrong ID (expect 404):**
 ```bash
-curl http://localhost:5000/api/habits/000000000000000000000000 \
+curl https://habit-tracker-6hob.onrender.com/api/habits/000000000000000000000000 \
   -H "Authorization: Bearer TOKEN"
 ```
 
 **Invalid ID format (expect 400):**
 ```bash
-curl http://localhost:5000/api/habits/not-a-valid-id \
+curl https://habit-tracker-6hob.onrender.com/api/habits/not-a-valid-id \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -170,7 +170,7 @@ curl http://localhost:5000/api/habits/not-a-valid-id \
 ## 7. Update Habit
 
 ```bash
-curl -X PUT http://localhost:5000/api/habits/HABIT_ID \
+curl -X PUT https://habit-tracker-6hob.onrender.com/api/habits/HABIT_ID \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d "{\"title\": \"Evening Run\", \"reminderTime\": \"18:00\"}"
@@ -178,7 +178,7 @@ curl -X PUT http://localhost:5000/api/habits/HABIT_ID \
 
 **Change frequency and tags:**
 ```bash
-curl -X PUT http://localhost:5000/api/habits/HABIT_ID \
+curl -X PUT https://habit-tracker-6hob.onrender.com/api/habits/HABIT_ID \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d "{\"frequency\": \"weekly\", \"tags\": [\"fitness\", \"evening\"]}"
@@ -186,7 +186,7 @@ curl -X PUT http://localhost:5000/api/habits/HABIT_ID \
 
 **Rename to a title that already exists (expect 409):**
 ```bash
-curl -X PUT http://localhost:5000/api/habits/HABIT_ID \
+curl -X PUT https://habit-tracker-6hob.onrender.com/api/habits/HABIT_ID \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer TOKEN" \
   -d "{\"title\": \"Read 20 Pages\"}"
@@ -197,13 +197,13 @@ curl -X PUT http://localhost:5000/api/habits/HABIT_ID \
 ## 8. Track Habit Today
 
 ```bash
-curl -X POST http://localhost:5000/api/habits/HABIT_ID/track \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/habits/HABIT_ID/track \
   -H "Authorization: Bearer TOKEN"
 ```
 
 **Same request again — duplicate (expect 409):**
 ```bash
-curl -X POST http://localhost:5000/api/habits/HABIT_ID/track \
+curl -X POST https://habit-tracker-6hob.onrender.com/api/habits/HABIT_ID/track \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -212,7 +212,7 @@ curl -X POST http://localhost:5000/api/habits/HABIT_ID/track \
 ## 9. Get History & Streak
 
 ```bash
-curl http://localhost:5000/api/habits/HABIT_ID/history \
+curl https://habit-tracker-6hob.onrender.com/api/habits/HABIT_ID/history \
   -H "Authorization: Bearer TOKEN"
 ```
 
@@ -221,12 +221,12 @@ curl http://localhost:5000/api/habits/HABIT_ID/history \
 ## 10. Delete Habit
 
 ```bash
-curl -X DELETE http://localhost:5000/api/habits/HABIT_ID \
+curl -X DELETE https://habit-tracker-6hob.onrender.com/api/habits/HABIT_ID \
   -H "Authorization: Bearer TOKEN"
 ```
 
 **Delete again (expect 404):**
 ```bash
-curl -X DELETE http://localhost:5000/api/habits/HABIT_ID \
+curl -X DELETE https://habit-tracker-6hob.onrender.com/api/habits/HABIT_ID \
   -H "Authorization: Bearer TOKEN"
 ```
